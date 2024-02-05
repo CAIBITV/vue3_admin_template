@@ -1,55 +1,20 @@
 <template>
   <div class="box">
-    <h1>Welcome to your Vue 3 App!</h1>
-    <p>Start building your awesome application here.</p>
-    <el-button type="primary" :icon="Plus">Hello, Element!</el-button>
-    <el-button type="success" :icon="Edit">Hello, Element!</el-button>
-    <el-pagination
-      v-model:current-page="currentPage1"
-      :page-size="100"
-      :small="small"
-      :disabled="disabled"
-      :background="background"
-      layout="total, prev, pager, next"
-      :total="1000"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-    />
-    <Test />
+    <h1>SVG测试</h1>
+    <!-- 测试SVG图标的使用 -->
+    <!-- svg:图标外层容器节点内部需要与use标签结合使用 -->
+    <svg style="height: 30px; height: 30px">
+      <!-- xlink:href 选择用哪个图标，属性只务必是以#icon-图标名字 -->
+      <!-- fill:填充颜色 -->
+      <use xlink:href="#icon-shop" fill="yellow"></use>
+    </svg>
   </div>
 </template>
 
 <script lang="ts" setup>
 defineOptions({
-  name: 'App',
+  name: 'App'
 })
-
-import Test from '@/components/Test.vue'
-
-import { Plus, Edit } from '@element-plus/icons-vue'
-
-import { ref } from 'vue'
-
-const currentPage1 = ref(5)
-const small = ref(false)
-const background = ref(false)
-const disabled = ref(false)
-
-const handleSizeChange = (val: number) => {
-  console.log(`${val} items per page`)
-}
-const handleCurrentChange = (val: number) => {
-  console.log(`current page: ${val}`)
-}
 </script>
 
-<style scoped lang="scss">
-.box {
-  width: 600px;
-  height: 400pox;
-  background-color: black;
-  h1 {
-    color: white;
-  }
-}
-</style>
+<style scoped lang="scss"></style>
