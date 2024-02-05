@@ -15,6 +15,7 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
+    <Test />
   </div>
 </template>
 
@@ -22,6 +23,8 @@
 defineOptions({
   name: 'App',
 })
+
+import Test from '@/components/Test.vue'
 
 import { Plus, Edit } from '@element-plus/icons-vue'
 
