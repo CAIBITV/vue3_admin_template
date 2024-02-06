@@ -17,6 +17,12 @@ app.use(ElementPlus, {
   locale: zhCn
 })
 
-console.log(import.meta.env)
+// 全局注册组件
+// import SvgIcon from '@/components/SvgIcon/index.vue'
+// app.component('SvgIcon', SvgIcon)
+
+// 引入自定义插件对象：注册整个项目全局组件
+import components from '@/components'
+app.use(components)
 
 app.mount('#app')
