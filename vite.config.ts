@@ -19,9 +19,19 @@ export default defineConfig({
   server: {
     port: 5173
   },
+  //src目录别名配置
   resolve: {
     alias: {
       '@': path.resolve('/src')
+    }
+  },
+  //scss全局变量配置
+  css: {
+    preprocessorOptions: {
+      scss: {
+        javascriptEnabled: true,
+        additionalData: '@import "@/styles/variables.scss";'
+      }
     }
   }
 })

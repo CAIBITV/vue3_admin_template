@@ -25,4 +25,7 @@ app.use(ElementPlus, {
 import components from '@/components'
 app.use(components)
 
+// 引入模版的全局样式
+import '@/styles/index.scss'
+
 app.mount('#app')

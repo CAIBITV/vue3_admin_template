@@ -1,8 +1,6 @@
 <template>
-  <div class="box">
-    <h1>SVG测试</h1>
-    <!-- 测试SVG图标的使用 -->
-    <SvgIcon name="shop" color="pink" width="100px" height="100px" />
+  <div>
+    <h1>SCSS</h1>
   </div>
 </template>
 
@@ -12,4 +10,10 @@ defineOptions({
 })
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+div {
+  h1 {
+    color: $base-color;
+  }
+}
+</style>
