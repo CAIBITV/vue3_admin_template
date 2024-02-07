@@ -33,4 +33,8 @@ import router from '@/router'
 // 注册模版路由
 app.use(router)
 
+// 引入pinia
+import pinia from '@/store'
+app.use(pinia)
+
 app.mount('#app')

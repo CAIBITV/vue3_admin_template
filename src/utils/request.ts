@@ -19,7 +19,6 @@ service.interceptors.request.use((config) => {
 // 第三步：响应拦截器
 service.interceptors.response.use(
   (response) => {
-    console.log('响应拦截器', response)
     // response响应对象，data响应数据
     // 返回响应数据
     return response.data

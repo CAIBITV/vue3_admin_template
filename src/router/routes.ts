@@ -18,11 +18,11 @@ const baseRouter = [
     path: '/404',
     name: '404',
     component: () => import('@/views/404/index.vue')
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    redirect: '/404'
   }
+  // {
+  //   path: '/:pathMatch(.*)*',
+  //   redirect: '/404'
+  // }
 ]
 
 export default baseRouter

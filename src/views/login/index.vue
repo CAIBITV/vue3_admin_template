@@ -3,13 +3,13 @@
     <el-row>
       <el-col :span="12" :xs="0" />
       <el-col :span="12" :xs="24">
-        <el-form class="login_form" label-width="100px">
+        <el-form class="login_form">
           <h1>Hello</h1>
           <h2>欢迎来到硅谷甄选</h2>
-          <el-form-item class="login_form_item" label="用户名">
+          <el-form-item>
             <el-input :prefix-icon="User" v-model="formData.username" />
           </el-form-item>
-          <el-form-item class="login_form_item" label="密码">
+          <el-form-item>
             <el-input
               :prefix-icon="Lock"
               type="password"
@@ -18,7 +18,13 @@
             />
           </el-form-item>
           <el-form-item>
-            <el-button class="login_btn" type="primary" size="default">
+            <el-button
+              class="login_btn"
+              type="primary"
+              size="default"
+              @click="login"
+              :loading="loading"
+            >
               登录
             </el-button>
           </el-form-item>
@@ -33,16 +39,53 @@ defineOptions({
   name: 'login'
 })
 import { User, Lock } from '@element-plus/icons-vue'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 const formData = reactive({
   username: 'admin',
   password: '111111'
 })
+
+const loading = ref(false)
+
+import { useUserStore } from '@/store/modules/user'
+let userStore = useUserStore()
+
+// 获取路由器
+import { useRouter } from 'vue-router'
+import { ElNotification } from 'element-plus'
+
+const router = useRouter()
+
+async function login() {
+  //点击登录按钮以后干什么
+  //通知仓库发起请求
+  //请求成功->路由跳转
+  //请求失败->弹出登陆失败信息
+  try {
+    loading.value = true
+    // 保证登录成功
+    await userStore.userLogin(formData)
+    // 编程式导航
+    ElNotification({
+      title: '登录成功',
+      message: '欢迎回来',
+      type: 'success'
+    })
+    router.push('/')
+  } catch (error: any) {
+    ElNotification({
+      title: '登录失败',
+      message: error.message,
+      type: 'error'
+    })
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
-<!-- 注意取出了 scoped -->
-<style lang="scss">
+<style scoped lang="scss">
 .login_container {
   width: 100%;
   // 100vh 为视口高度
@@ -65,10 +108,6 @@ const formData = reactive({
       font-size: 30px;
       color: #fff;
       margin: 20px 0px;
-    }
-    // 这里修改了el-form-item的label的颜色，但这个组件是element-plus提供的，所以需要去掉 scoped
-    .login_form_item .el-form-item__label {
-      color: #fba904;
     }
     .login_btn {
       width: 100%;
