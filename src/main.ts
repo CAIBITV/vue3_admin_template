@@ -28,4 +28,9 @@ app.use(components)
 // 引入模版的全局样式
 import '@/styles/index.scss'
 
+// 引入路由
+import router from '@/router'
+// 注册模版路由
+app.use(router)
+
 app.mount('#app')
