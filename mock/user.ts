@@ -28,12 +28,14 @@ function createUserList() {
   ]
 }
 
+import { type RespThisType } from 'vite-plugin-mock'
+
 export default [
   // 用户登录接口
   {
     url: '/api/user/login', //请求地址
     method: 'post', //请求方式
-    response: ({ body }) => {
+    response: function (this: RespThisType, { body }) {
       //获取请求体携带过来的用户名与密码
       const { username, password } = body
       //调用获取用户信息函数,用于判断是否有此用户
@@ -42,6 +44,7 @@ export default [
       )
       //没有用户返回失败信息
       if (!checkUser) {
+        this.res.statusCode = 400
         return { code: 201, data: { message: '账号或者密码不正确' } }
       }
       //如果有返回成功信息
@@ -64,6 +67,22 @@ export default [
       }
       //如果有返回成功信息
       return { code: 200, data: { checkUser } }
+    }
+  },
+  {
+    url: '/api/text',
+    method: 'post',
+    rawResponse: async (req, res) => {
+      let reqbody = ''
+      await new Promise((resolve) => {
+        req.on('data', (chunk) => {
+          reqbody += chunk
+        })
+        req.on('end', () => resolve(undefined))
+      })
+      res.setHeader('Content-Type', 'text/plain')
+      res.statusCode = 200
+      res.end(`hello, ${reqbody}`)
     }
   }
 ]

@@ -28,16 +28,4 @@ app.use(components)
 // 引入模版的全局样式
 import '@/styles/index.scss'
 
-// 测试mock接口能否正常运行
-import axios from 'axios'
-// 登录接口
-axios({
-  url: '/api/user/login',
-  method: 'post',
-  data: {
-    username: 'admin',
-    password: '1111111'
-  }
-})
-
 app.mount('#app')
