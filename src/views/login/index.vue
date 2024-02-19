@@ -57,6 +57,8 @@ import { ElNotification } from 'element-plus'
 
 const router = useRouter()
 
+import { getTime } from '@/utils/time'
+
 async function login() {
   //点击登录按钮以后干什么
   //通知仓库发起请求
@@ -68,8 +70,8 @@ async function login() {
     await userStore.userLogin(formData)
     // 编程式导航
     ElNotification({
-      title: '登录成功',
-      message: '欢迎回来',
+      title: `HI,${getTime()}好`,
+      message: '欢迎回来!',
       type: 'success'
     })
     router.push('/')
